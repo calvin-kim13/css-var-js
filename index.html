@@ -41,7 +41,7 @@
       misc styles, nothing to do with CSS variables
     */
       :root {
-        --base: rgb(210, 77, 77);
+        --base: #ffc600;
         --blur: 10px;
         --spacing: 10px;
       }
@@ -74,6 +74,23 @@
       }
     </style>
 
-    <script></script>
+    <script>
+      const inputs = document.querySelectorAll(".controls input");
+
+      const handleChange = (e) => {
+        const value = e.target.value;
+        const name = e.target.name;
+        const measurement = e.target.dataset.sizing || "";
+
+        document.documentElement.style.setProperty(
+          `--${name}`,
+          value + measurement
+        );
+      };
+      inputs.forEach((input) => {
+        input.addEventListener("change", (e) => handleChange(e));
+        input.addEventListener("mousemove", (e) => handleChange(e));
+      });
+    </script>
   </body>
 </html>
